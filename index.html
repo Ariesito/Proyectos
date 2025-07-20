@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AriesitoMc | Noticias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --morado: #8a2be2;
+            --morado-claro: #b36bff;
+            --fondo: #0f0a1a;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Raleway', sans-serif;
+            color: white;
+            min-height: 100vh;
+            background: url('https://i.postimg.cc/GtMbT2Cm/minecraft-cozy.jpg') no-repeat center center fixed;
+            background-size: cover;
+            background-color: var(--fondo);
+        }
+
+        .logo-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--morado);
+            box-shadow: 0 0 30px var(--morado);
+            background: white;
+            transition: transform 0.3s;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .glass {
+            background: rgba(20, 20, 20, 0.75);
+            backdrop-filter: blur(15px);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        header {
+            padding: 2rem;
+            margin: 1.5rem;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--morado-claro);
+            margin: 0.5rem 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 1.5rem;
+        }
+
+        nav a {
+            color: #d4b2ff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+
+        nav a:hover {
+            color: white;
+            background: rgba(179, 107, 255, 0.2);
+        }
+
+        main {
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .noticias-grid {
+            display: grid;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .noticia {
+            background: rgba(35, 35, 35, 0.7);
+            border-left: 5px solid var(--morado);
+            transition: all 0.4s;
+            padding: 2rem;
+        }
+
+        .noticia:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(138, 43, 226, 0.4);
+        }
+
+        .noticia h3 {
+            color: var(--morado-claro);
+            margin: 0 0 1.5rem 0;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .noticia p {
+            color: #e0e0e0;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .noticia .fecha {
+            color: #b36bff;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .logo-container {
+                width: 160px;
+                height: 160px;
+            }
+            
+            nav {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .noticia {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container glass">
+        <img src="https://i.postimg.cc/MptZhd4Q/1752970060758.jpg" alt="Logo AriesitoMc">
+    </div>
+
+    <header class="glass">
+        <h1>AriesitoMc</h1>
+        <nav>
+            <a href="index.html">Noticias</a>
+            <a href="proyectos.html">Proyectos</a>
+            <a href="redes.html">Redes</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="noticias" class="glass" style="margin: 2rem auto;">
+            <h2 style="text-align: center; margin-bottom: 2rem;">
+                <i class='bx bxs-news'></i> Últimas Noticias
+            </h2>
+            <div class="noticias-grid" id="noticias-grid">
+                <!-- Noticias generadas por JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <footer class="glass">
+        <p>AriesitoMc © 2024 - Todos los derechos reservados</p>
+    </footer>
+
+    <script>
+        const noticias = [
+            {
+                titulo: "Nueva Actualización de Texturas",
+                contenido: "Acabamos de lanzar la versión 2.0 de nuestro pack estrella con mejoras visuales en todos los bloques y nuevos diseños para herramientas y armaduras.",
+                fecha: "25 Julio 2024",
+                icono: "bxs-palette"
+            },
+            {
+                titulo: "Evento Especial en Discord",
+                contenido: "Únete a nuestro servidor el próximo sábado para un evento exclusivo con sorteos, previews de nuevos proyectos y sesión de preguntas y respuestas.",
+                fecha: "20 Julio 2024",
+                icono: "bx-party"
+            },
+            {
+                titulo: "Próximo Lanzamiento",
+                contenido: "Estamos preparando un shader pack exclusivo que complementará perfectamente nuestras texturas. ¡Mantente atento a nuestras redes para el anuncio oficial!",
+                fecha: "15 Julio 2024",
+                icono: "bx-rocket"
+            }
+        ];
+
+        const grid = document.getElementById('noticias-grid');
+        
+        noticias.forEach(noticia => {
+            const card = document.createElement('div');
+            card.className = 'noticia glass';
+            card.innerHTML = `
+                <h3><i class='bx ${noticia.icono}'></i> ${noticia.titulo}</h3>
+                <p>${noticia.contenido}</p>
+                <div class="fecha"><i class='bx bx-calendar'></i> ${noticia.fecha}</div>
+            `;
+            grid.appendChild(card);
+        });
+
+        document.addEventListener('gesturestart', e => e.preventDefault());
+    </script>
+</body>
+</html>
