@@ -13,21 +13,36 @@
             --morado: #8a2be2;
             --morado-claro: #b36bff;
             --fondo: #0f0a1a;
-            --sidebar-width: 280px; /* Ancho de la sidebar en PC */
-            --sidebar-width-mobile: 240px; /* Ancho de la sidebar en móvil */
-            --navbar-height: 80px; /* Altura de la nueva barra de navegación fija */
+            --navbar-height: 80px; 
+            --navbar-bg: rgba(15, 10, 26, 0.95);
+            --glass-bg: rgba(20, 20, 20, 0.75);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
         }
         
         body {
             margin: 0;
-            padding: var(--navbar-height) 0 0 0; /* Padding superior para compensar el fixed navbar */
+            padding-top: var(--navbar-height); 
             font-family: 'Raleway', sans-serif;
             color: white;
             min-height: 100vh;
-            background: url('https://i.postimg.cc/GtMbT2Cm/minecraft-cozy.jpg') no-repeat center center fixed;
-            background-size: cover;
             background-color: var(--fondo);
-            overflow-x: hidden; /* Evita desbordamiento horizontal */
+            overflow-x: hidden; 
+            position: relative; 
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.postimg.cc/GtMbT2Cm/minecraft-cozy.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -1; 
+            -webkit-transform: translate3d(0, 0, 0); 
+            transform: translate3d(0, 0, 0); 
         }
 
         .logo-container {
@@ -53,54 +68,96 @@
         }
 
         .glass {
-            background: rgba(20, 20, 20, 0.75);
+            background: var(--glass-bg);
             backdrop-filter: blur(15px);
             border-radius: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
+            border: var(--glass-border);
+            box-shadow: var(--glass-shadow);
             transition: all 0.3s ease;
         }
 
-        /* --- Sticky Navbar Superior (solo con botón a la derecha) --- */
+        /* --- Sticky Navbar Superior (Nueva Barra de Navegación) --- */
         .top-navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: var(--navbar-height);
-            background: rgba(15, 10, 26, 0.95);
+            background: var(--navbar-bg);
             backdrop-filter: blur(15px);
             z-index: 1900;
             display: flex;
             align-items: center;
-            justify-content: flex-end; /* Alinea los elementos a la derecha */
+            justify-content: center; /* Centrado horizontal */
             padding: 0 2rem;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .openbtn {
-            font-size: 1.2rem; /* Tamaño del texto del botón */
-            cursor: pointer;
-            background-color: transparent;
-            color: white;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            display: flex; /* Usar flexbox para el contenido del botón */
+        
+        .navbar-links {
+            display: flex;
+            position: relative; /* Para posicionar el indicador */
+            height: 60px; /* Altura de la barra interna */
+            background: rgba(30, 30, 30, 0.6); /* Fondo de la barra interna */
+            border-radius: 50px;
+            padding: 0 10px; /* Espacio interno */
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            max-width: 450px; /* Limita el ancho en PC */
+            width: 100%; /* Ocupa todo el ancho disponible */
             align-items: center;
-            gap: 8px; /* Espacio entre el texto y el icono */
-            font-weight: 600; /* Hace el texto un poco más negrita */
+            justify-content: space-around; /* Distribuye los elementos */
         }
 
-        .openbtn i {
-            font-size: 28px; /* Tamaño del icono */
+        .navbar-link {
+            flex: 1; /* Distribuye el espacio equitativamente */
+            display: flex;
+            flex-direction: column; /* Icono y texto en columna */
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease; /* Añadir transform para el movimiento */
+            position: relative;
+            z-index: 2; /* Asegura que los enlaces estén sobre el indicador */
+            padding: 0 5px; /* Pequeño padding para el texto */
         }
 
-        .openbtn:hover {
-            background-color: rgba(138, 43, 226, 0.3);
+        .navbar-link i {
+            font-size: 1.5rem;
+            margin-bottom: 3px;
+            transition: color 0.3s ease;
         }
+
+        .navbar-link.active {
+            color: white; /* Color del texto cuando está activo */
+            /* Efecto de "levantar" ligeramente el enlace activo */
+            transform: translateY(-5px); 
+        }
+        .navbar-link.active i {
+            color: white; /* Color del icono cuando está activo */
+        }
+
+        .indicator {
+            position: absolute;
+            height: 70px; /* Altura ligeramente mayor para simular separación */
+            width: 70px; /* Ancho fijo para un círculo/óvalo */
+            background: var(--morado); /* Color del indicador */
+            border-radius: 50%; /* Hacerlo circular */
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Animación elástica */
+            box-shadow: 0 0 15px var(--morado-claro), 0 5px 15px rgba(0,0,0,0.3); /* Sombra para profundidad */
+            z-index: 1; /* Detrás de los enlaces */
+            /* Ajuste para que parezca "separado" y centrado */
+            top: 50%; 
+            transform: translate(-50%, -50%); /* Centrado inicial, left lo moverá */
+            opacity: 0; /* Oculto inicialmente hasta que JS lo posicione */
+        }
+        .indicator.visible {
+            opacity: 1; /* Visible cuando JS lo activa */
+        }
+
         /* --- FIN Sticky Navbar Superior --- */
 
         header {
@@ -113,85 +170,15 @@
 
         h1 {
             color: var(--morado-claro);
-            margin: 0.5rem 0;
+            margin: 0.5rem 0 1.5rem;
             font-size: 2.5rem;
             font-weight: 800;
             letter-spacing: 0.5px;
             font-family: 'Montserrat', sans-serif;
-            text-shadow: 0 0 15px rgba(179, 107, 255, 0.7);
+            text-shadow: 0 0 8px rgba(179, 107, 255, 0.8), 
+                         0 0 15px rgba(179, 107, 255, 0.5);
         }
         
-        /* --- Estilos de la Sidebar --- */
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 2000;
-            top: 0;
-            left: 0;
-            background-color: rgba(15, 10, 26, 0.9);
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: calc(var(--navbar-height) + 20px);
-            backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar a {
-            padding: 15px 25px 15px 35px;
-            text-decoration: none;
-            font-size: 1.4rem;
-            color: #d4b2ff;
-            display: block;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .sidebar a:hover {
-            color: white;
-            background-color: rgba(179, 107, 255, 0.2);
-        }
-
-        .sidebar .closebtn {
-            position: absolute;
-            top: 15px;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-            color: #d4b2ff;
-            text-decoration: none;
-        }
-
-        .sidebar .closebtn:hover {
-            color: white;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1500;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease;
-        }
-
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        #main {
-            padding: 0;
-        }
-        /* --- Fin Estilos de la Sidebar --- */
-
-
         main {
             padding: 0 2rem;
             max-width: 1200px;
@@ -220,14 +207,14 @@
             color: var(--morado-claro);
             margin: 0 0 1.5rem 0;
             font-size: 1.5rem;
-            display: flex; /* Asegura que el icono y el texto estén en línea */
+            display: flex;
             align-items: center;
-            gap: 10px; /* Espacio entre el icono y el texto */
-            flex-wrap: wrap; /* Permite que el contenido se ajuste en líneas si es muy largo */
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .noticia h3 i {
-            flex-shrink: 0; /* Evita que el icono se encoja */
+            flex-shrink: 0;
         }
 
         .noticia p {
@@ -255,7 +242,7 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             :root {
-                --navbar-height: 70px; /* Menor altura para navbar en móviles */
+                --navbar-height: 70px; 
             }
             body {
                 padding-top: var(--navbar-height);
@@ -276,60 +263,83 @@
                 font-size: 2rem;
             }
 
-            /* Navbar Móvil */
             .top-navbar {
                 padding: 0 1rem;
-                justify-content: flex-end;
             }
-            .openbtn {
-                font-size: 1rem; /* Ajuste para el texto del botón en móvil */
-                padding: 6px 10px;
+            .navbar-links {
+                height: 55px; /* Altura de la barra interna en móvil */
+                padding: 0 5px;
             }
-            .openbtn i {
-                font-size: 24px; /* Ajuste para el icono del botón en móvil */
+            .navbar-link {
+                font-size: 0.8rem; /* Fuente más pequeña para que quepan */
             }
-            
-            .sidebar {
-                padding-top: calc(var(--navbar-height) + 10px);
-                width: 0;
+            .navbar-link i {
+                font-size: 1.3rem;
             }
-
-            .sidebar a {
-                font-size: 1.2rem;
-                padding: 10px 15px 10px 25px;
+            .indicator {
+                height: 60px; /* Más pequeño para móvil */
+                width: 60px; /* Más pequeño para móvil */
+                border-radius: 50%;
             }
 
-            .sidebar .closebtn {
-                font-size: 30px;
-                right: 15px;
-            }
-            
             .noticias-grid {
                 grid-template-columns: 1fr;
             }
             .noticia h3 {
-                font-size: 1.3rem; /* Ajuste del tamaño de título en móvil */
+                font-size: 1.3rem;
             }
         }
-        @media (max-width: 480px) {
-            .sidebar {
-                --sidebar-width-mobile: 80%;
+
+        /* Ajustes para PC */
+        @media (min-width: 769px) {
+            h1 {
+                font-size: 3rem; 
+            }
+            .logo-container {
+                width: 250px; 
+                height: 250px;
+            }
+            .top-navbar {
+                justify-content: center; 
+            }
+            .navbar-links {
+                height: 65px; /* Altura de la barra interna en PC */
+                max-width: 500px; /* Ancho máximo ajustado para PC */
+            }
+            .navbar-link {
+                font-size: 1rem; 
+            }
+            .navbar-link i {
+                font-size: 1.7rem;
+            }
+            .indicator {
+                height: 70px; 
+                width: 70px; 
+            }
+            main {
+                max-width: 1000px; 
+                padding: 0 4rem; 
             }
         }
     </style>
 </head>
 <body>
-    <div id="sidebar-overlay" class="overlay" onclick="closeNav()"></div>
-
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <a href="index.html"><i class='bx bxs-home'></i> Inicio</a>
-        <a href="proyectos.html"><i class='bx bxs-folder-open'></i> Proyectos</a>
-        <a href="redes.html"><i class='bx bxs-share-alt'></i> Redes</a>
-    </div>
-
     <div class="top-navbar">
-        <button class="openbtn" onclick="openNav()">Menú <i class='bx bx-menu'></i></button>
+        <div class="navbar-links" id="main-nav-links">
+            <a href="index.html" class="navbar-link" data-page="index">
+                <i class='bx bxs-home'></i>
+                <span>Inicio</span>
+            </a>
+            <a href="proyectos.html" class="navbar-link" data-page="proyectos">
+                <i class='bx bxs-folder-open'></i>
+                <span>Proyectos</span>
+            </a>
+            <a href="redes.html" class="navbar-link" data-page="redes">
+                <i class='bx bxs-share-alt'></i>
+                <span>Redes</span>
+            </a>
+            <span class="indicator"></span>
+        </div>
     </div>
 
     <div id="main">
@@ -357,21 +367,7 @@
     </div>
 
     <script>
-        // JavaScript para abrir/cerrar la sidebar
-        function openNav() {
-            const sidebarWidth = window.innerWidth <= 768 ? 'var(--sidebar-width-mobile)' : 'var(--sidebar-width)';
-            document.getElementById("mySidebar").style.width = sidebarWidth;
-            document.getElementById("sidebar-overlay").classList.add("active");
-            document.body.style.overflow = "hidden";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidebar").style.width = "0";
-            document.getElementById("sidebar-overlay").classList.remove("active");
-            document.body.style.overflow = "auto";
-        }
-
-        // Script original para las noticias
+        // Contenido de las noticias (SOLO LA TUYA)
         const noticias = [
             {
                 titulo: "Obsidian 2.3",
@@ -392,6 +388,63 @@
                 <div class="fecha"><i class='bx bx-calendar'></i> ${noticia.fecha}</div>
             `;
             grid.appendChild(card);
+        });
+
+        // Script para la nueva barra de navegación
+        document.addEventListener("DOMContentLoaded", function() {
+            const navLinks = document.querySelectorAll('.navbar-link');
+            const indicator = document.querySelector('.indicator');
+            const currentPath = window.location.pathname.split("/").pop();
+            let activeLink = null;
+
+            // Determinar el enlace activo al cargar la página
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('data-page');
+                const expectedPath = `${linkPage}.html`;
+                // Check for index.html (which might be just "" or "/")
+                if (currentPath === expectedPath || (currentPath === "" && linkPage === "index")) {
+                    activeLink = link;
+                    link.classList.add('active');
+                }
+            });
+
+            // Posicionar el indicador inicialmente
+            function positionIndicator() {
+                if (activeLink) {
+                    // Calcula el 'left' para centrar el indicador bajo el enlace activo
+                    indicator.style.left = `${activeLink.offsetLeft + (activeLink.offsetWidth / 2)}px`;
+                    indicator.classList.add('visible'); // Hacer el indicador visible
+                }
+            }
+
+            // Llamar al posicionamiento inicial y al redimensionar
+            positionIndicator();
+            window.addEventListener('resize', positionIndicator);
+
+            // Manejar clics en los enlaces
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Remover clase 'active' del enlace anterior
+                    if (activeLink) {
+                        activeLink.classList.remove('active');
+                    }
+
+                    // Actualizar el enlace activo y añadir la clase 'active'
+                    activeLink = this;
+                    activeLink.classList.add('active');
+
+                    // Mover el indicador
+                    positionIndicator();
+
+                    // Navegar a la página después de un pequeño retraso para la animación
+                    // Ajustamos el tiempo para que la animación se complete antes de la navegación
+                    setTimeout(() => {
+                        window.location.href = this.href;
+                    }, 300); 
+                    
+                    e.preventDefault(); // Prevenir la navegación inmediata
+                });
+            });
         });
 
         document.addEventListener('gesturestart', e => e.preventDefault());

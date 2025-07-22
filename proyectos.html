@@ -13,21 +13,36 @@
             --morado: #8a2be2;
             --morado-claro: #b36bff;
             --fondo: #0f0a1a;
-            --sidebar-width: 280px; /* Ancho de la sidebar en PC */
-            --sidebar-width-mobile: 240px; /* Ancho de la sidebar en móvil */
-            --navbar-height: 80px; /* Altura de la nueva barra de navegación fija */
+            --navbar-height: 80px; 
+            --navbar-bg: rgba(15, 10, 26, 0.95);
+            --glass-bg: rgba(20, 20, 20, 0.75);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.15);
+            --glass-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
         }
         
         body {
             margin: 0;
-            padding: var(--navbar-height) 0 0 0; /* Padding superior para compensar el fixed navbar */
+            padding-top: var(--navbar-height); 
             font-family: 'Poppins', sans-serif;
             color: white;
             min-height: 100vh;
-            background: url('https://i.postimg.cc/GtMbT2Cm/minecraft-cozy.jpg') no-repeat center center fixed;
-            background-size: cover;
             background-color: var(--fondo);
-            overflow-x: hidden; /* Evita desbordamiento horizontal */
+            overflow-x: hidden; 
+            position: relative; 
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.postimg.cc/GtMbT2Cm/minecraft-cozy.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -1; 
+            -webkit-transform: translate3d(0, 0, 0); 
+            transform: translate3d(0, 0, 0); 
         }
 
         .logo-container {
@@ -53,54 +68,94 @@
         }
 
         .glass {
-            background: rgba(20, 20, 20, 0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 18px;
+            border: var(--glass-border);
+            box-shadow: var(--glass-shadow);
             transition: all 0.3s ease;
         }
 
-        /* --- Sticky Navbar Superior (solo con botón a la derecha) --- */
+        /* --- Sticky Navbar Superior (Nueva Barra de Navegación) --- */
         .top-navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: var(--navbar-height);
-            background: rgba(15, 10, 26, 0.95);
+            background: var(--navbar-bg);
             backdrop-filter: blur(15px);
             z-index: 1900;
             display: flex;
             align-items: center;
-            justify-content: flex-end; /* Alinea los elementos a la derecha */
+            justify-content: center; /* Centrado horizontal */
             padding: 0 2rem;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        .openbtn {
-            font-size: 1.2rem; /* Tamaño del texto del botón */
-            cursor: pointer;
-            background-color: transparent;
-            color: white;
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-            display: flex; /* Usar flexbox para el contenido del botón */
+        
+        .navbar-links {
+            display: flex;
+            position: relative; 
+            height: 60px; 
+            background: rgba(30, 30, 30, 0.6); 
+            border-radius: 50px;
+            padding: 0 10px; 
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            max-width: 450px; 
+            width: 100%; 
             align-items: center;
-            gap: 8px; /* Espacio entre el texto y el icono */
+            justify-content: space-around; 
+        }
+
+        .navbar-link {
+            flex: 1; 
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
             font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+            z-index: 2; 
+            padding: 0 5px; 
         }
 
-        .openbtn i {
-            font-size: 28px; /* Tamaño del icono */
+        .navbar-link i {
+            font-size: 1.5rem;
+            margin-bottom: 3px;
+            transition: color 0.3s ease;
         }
 
-        .openbtn:hover {
-            background-color: rgba(138, 43, 226, 0.3);
+        .navbar-link.active {
+            color: white; 
+            transform: translateY(-5px); 
         }
+        .navbar-link.active i {
+            color: white; 
+        }
+
+        .indicator {
+            position: absolute;
+            height: 70px; 
+            width: 70px; 
+            background: var(--morado); 
+            border-radius: 50%; 
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+            box-shadow: 0 0 15px var(--morado-claro), 0 5px 15px rgba(0,0,0,0.3); 
+            z-index: 1; 
+            top: 50%; 
+            transform: translate(-50%, -50%); 
+            opacity: 0; 
+        }
+        .indicator.visible {
+            opacity: 1;
+        }
+
         /* --- FIN Sticky Navbar Superior --- */
 
         header {
@@ -118,79 +173,10 @@
             font-weight: 800;
             letter-spacing: 0.5px;
             font-family: 'Montserrat', sans-serif;
-            text-shadow: 0 0 15px rgba(179, 107, 255, 0.7);
+            text-shadow: 0 0 8px rgba(179, 107, 255, 0.8), 
+                         0 0 15px rgba(179, 107, 255, 0.5);
             display: block;
         }
-
-        /* --- Estilos de la Sidebar --- */
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 2000;
-            top: 0;
-            left: 0;
-            background-color: rgba(15, 10, 26, 0.9);
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: calc(var(--navbar-height) + 20px);
-            backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .sidebar a {
-            padding: 15px 25px 15px 35px;
-            text-decoration: none;
-            font-size: 1.4rem;
-            color: #d4b2ff;
-            display: block;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .sidebar a:hover {
-            color: white;
-            background-color: rgba(179, 107, 255, 0.2);
-        }
-
-        .sidebar .closebtn {
-            position: absolute;
-            top: 15px;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-            color: #d4b2ff;
-            text-decoration: none;
-        }
-
-        .sidebar .closebtn:hover {
-            color: white;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 1500;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s ease;
-        }
-
-        .overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        #main {
-            padding: 0;
-        }
-        /* --- Fin Estilos de la Sidebar --- */
 
         main {
             padding: 0 2rem;
@@ -230,13 +216,13 @@
             color: var(--morado-claro);
             margin: 0;
             font-size: 1.3rem;
-            display: flex; /* Asegura que el icono y el texto estén en línea */
+            display: flex;
             align-items: center;
-            gap: 8px; /* Espacio entre el icono y el texto */
-            flex-wrap: wrap; /* Permite que el contenido se ajuste en líneas si es muy largo */
+            gap: 8px;
+            flex-wrap: wrap;
         }
         .proyecto h3 i {
-            flex-shrink: 0; /* Evita que el icono se encoja */
+            flex-shrink: 0;
         }
 
         .proyecto p {
@@ -274,7 +260,7 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             :root {
-                --navbar-height: 70px; /* Menor altura para navbar en móviles */
+                --navbar-height: 70px; 
             }
             body {
                 padding-top: var(--navbar-height);
@@ -294,31 +280,25 @@
                 font-size: 2rem;
             }
 
-            /* Navbar Móvil */
             .top-navbar {
                 padding: 0 1rem;
-                justify-content: flex-end;
             }
-            .openbtn {
-                font-size: 1rem;
-                padding: 6px 10px;
+            .navbar-links {
+                height: 55px; 
+                padding: 0 5px;
             }
-            .openbtn i {
-                font-size: 24px;
+            .navbar-link {
+                font-size: 0.8rem; 
             }
-            
-            .sidebar {
-                padding-top: calc(var(--navbar-height) + 10px);
-                width: 0;
+            .navbar-link i {
+                font-size: 1.3rem;
             }
-            .sidebar a {
-                font-size: 1.2rem;
-                padding: 10px 15px 10px 25px;
+            .indicator {
+                height: 60px; 
+                width: 60px; 
+                border-radius: 50%;
             }
-            .sidebar .closebtn {
-                font-size: 30px;
-                right: 15px;
-            }
+
             .proyectos-grid {
                 grid-template-columns: 1fr;
             }
@@ -326,25 +306,57 @@
                 font-size: 1.1rem;
             }
         }
-        @media (max-width: 480px) {
-            .sidebar {
-                --sidebar-width-mobile: 80%; 
+
+        /* Ajustes para PC */
+        @media (min-width: 769px) {
+            h1 {
+                font-size: 3rem;
+            }
+            .logo-container {
+                width: 250px;
+                height: 250px;
+            }
+            .top-navbar {
+                justify-content: center;
+            }
+            .navbar-links {
+                height: 65px;
+                max-width: 500px;
+            }
+            .navbar-link {
+                font-size: 1rem;
+            }
+            .navbar-link i {
+                font-size: 1.7rem;
+            }
+            .indicator {
+                height: 70px; 
+                width: 70px; 
+            }
+            main {
+                max-width: 1000px;
+                padding: 0 4rem;
             }
         }
     </style>
 </head>
 <body>
-    <div id="sidebar-overlay" class="overlay" onclick="closeNav()"></div>
-
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-        <a href="index.html"><i class='bx bxs-home'></i> Inicio</a>
-        <a href="proyectos.html"><i class='bx bxs-folder-open'></i> Proyectos</a>
-        <a href="redes.html"><i class='bx bxs-share-alt'></i> Redes</a>
-    </div>
-
     <div class="top-navbar">
-        <button class="openbtn" onclick="openNav()">Menú <i class='bx bx-menu'></i></button>
+        <div class="navbar-links" id="main-nav-links">
+            <a href="index.html" class="navbar-link" data-page="index">
+                <i class='bx bxs-home'></i>
+                <span>Inicio</span>
+            </a>
+            <a href="proyectos.html" class="navbar-link" data-page="proyectos">
+                <i class='bx bxs-folder-open'></i>
+                <span>Proyectos</span>
+            </a>
+            <a href="redes.html" class="navbar-link" data-page="redes">
+                <i class='bx bxs-share-alt'></i>
+                <span>Redes</span>
+            </a>
+            <span class="indicator"></span>
+        </div>
     </div>
 
     <div id="main">
@@ -372,21 +384,7 @@
     </div>
 
     <script>
-        // JavaScript para abrir/cerrar la sidebar
-        function openNav() {
-            const sidebarWidth = window.innerWidth <= 768 ? 'var(--sidebar-width-mobile)' : 'var(--sidebar-width)';
-            document.getElementById("mySidebar").style.width = sidebarWidth;
-            document.getElementById("sidebar-overlay").classList.add("active");
-            document.body.style.overflow = "hidden";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidebar").style.width = "0";
-            document.getElementById("sidebar-overlay").classList.remove("active");
-            document.body.style.overflow = "auto";
-        }
-
-        // Script original para los proyectos
+        // Contenido de los proyectos (SOLO LOS TUYOS)
         const proyectos = [
             {
                 titulo: "Export World 1.21.93+",
@@ -414,10 +412,58 @@
                 <div class="proyecto-contenido">
                     <h3><i class='bx ${proyecto.icono}'></i> ${proyecto.titulo}</h3>
                     <p>${proyecto.descripcion}</p>
-                    <a href="${proyecto.enlace}"><i class='bx bx-download'></i> Descargar</a>
+                    <a href="${proyecto.enlace}" target="_blank"><i class='bx bx-download'></i> Descargar</a>
                 </div>
             `;
             grid.appendChild(card);
+        });
+
+        // Script para la nueva barra de navegación
+        document.addEventListener("DOMContentLoaded", function() {
+            const navLinks = document.querySelectorAll('.navbar-link');
+            const indicator = document.querySelector('.indicator');
+            const currentPath = window.location.pathname.split("/").pop();
+            let activeLink = null;
+
+            // Determinar el enlace activo al cargar la página
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('data-page');
+                const expectedPath = `${linkPage}.html`;
+                if (currentPath === expectedPath || (currentPath === "" && linkPage === "index")) {
+                    activeLink = link;
+                    link.classList.add('active');
+                }
+            });
+
+            // Posicionar el indicador inicialmente
+            function positionIndicator() {
+                if (activeLink) {
+                    indicator.style.left = `${activeLink.offsetLeft + (activeLink.offsetWidth / 2)}px`;
+                    indicator.classList.add('visible');
+                }
+            }
+
+            positionIndicator();
+            window.addEventListener('resize', positionIndicator);
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (activeLink) {
+                        activeLink.classList.remove('active');
+                    }
+
+                    activeLink = this;
+                    activeLink.classList.add('active');
+
+                    positionIndicator();
+
+                    setTimeout(() => {
+                        window.location.href = this.href;
+                    }, 300); 
+                    
+                    e.preventDefault(); 
+                });
+            });
         });
 
         document.addEventListener('gesturestart', e => e.preventDefault());
