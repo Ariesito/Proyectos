@@ -4,18 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AriesitoMc | Inicio</title>
-
-    <meta name="description" content="Bienvenido a la Página Oficial de AriesitoMc. Ven y descubre mis proyectos, optimizadores y mucho más.">
-    <meta property="og:title" content="AriesitoMc | Inicio">
-    <meta property="og:description" content="Bienvenido a la Página Oficial de AriesitoMc. Ven y descubre mis proyectos, optimizadores y mucho más.">
-    <meta property="og:image" content="https://i.postimg.cc/MptZhd4Q/1752970060758.jpg">
-    <meta property="og:url" content="https://ariesito.netlify.app">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="AriesitoMc | Inicio">
-    <meta name="twitter:description" content="Bienvenido a la Página Oficial de AriesitoMc. Ven y descubre mis proyectos, optimizadores y mucho más.">
-    <meta name="twitter:image" content="https://i.postimg.cc/MptZhd4Q/1752970060758.jpg">
-    <meta name="twitter:site" content="@tu_usuario_twitter">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -379,31 +367,40 @@
     </div>
 
     <script>
-        // Contenido de las noticias
-        const noticias = [
-            {
-                titulo: "Obsidian 2.3",
-                contenido: "Ya esta Disponible este Increíble Optimizador en su última version llamada Graphics Update",
-                fecha: "29/07/2025",
-                icono: "bxs-star"
-            }
-        ];
-
-        const grid = document.getElementById('noticias-grid');
-        
-        noticias.forEach(noticia => {
-            const card = document.createElement('div');
-            card.className = 'noticia glass';
-            card.innerHTML = `
-                <h3><i class='bx ${noticia.icono}'></i> ${noticia.titulo}</h3>
-                <p>${noticia.contenido}</p>
-                <div class="fecha"><i class='bx bx-calendar'></i> ${noticia.fecha}</div>
-            `;
-            grid.appendChild(card);
-        });
-
-        // Script para la nueva barra de navegación
         document.addEventListener("DOMContentLoaded", function() {
+            // Contenido de las noticias
+            const noticias = [
+                {
+                    titulo: "Obsidian 2.4",
+                    contenido: "¿Se Confirma La Obsidian Update? recientemente Ariesito envío algunas imágenes en su comunidad de WhatsApp que demuestran que está trabajando en Obsidian posiblemente sea una de las más grandes actualizaciones!",
+                    fecha: "11/09/2025",
+                    icono: "bxs-palette"
+                },
+                {
+                    titulo: "Nuevo Canal",
+                    contenido: "AriesitoMc tiene un nuevo nombre de usuario en todas sus redes sociales (SoyAriesitomc) Que esperas para seguirlo?",
+                    fecha: "11/09/2025",
+                    icono: "bxs-star"
+                }
+            ];
+
+            const grid = document.getElementById('noticias-grid');
+            
+            // Asegurarse de que el elemento existe antes de intentar usarlo
+            if (grid) {
+                noticias.forEach(noticia => {
+                    const card = document.createElement('div');
+                    card.className = 'noticia glass';
+                    card.innerHTML = `
+                        <h3><i class='bx ${noticia.icono}'></i> ${noticia.titulo}</h3>
+                        <p>${noticia.contenido}</p>
+                        <div class="fecha"><i class='bx bx-calendar'></i> ${noticia.fecha}</div>
+                    `;
+                    grid.appendChild(card);
+                });
+            }
+
+            // Script para la nueva barra de navegación
             const navLinks = document.querySelectorAll('.navbar-link');
             const indicator = document.querySelector('.indicator');
             const currentPath = window.location.pathname.split("/").pop();
@@ -463,3 +460,4 @@
     </script>
 </body>
 </html>
+
