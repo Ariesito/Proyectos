@@ -4,350 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AriesitoMc | Proyectos</title>
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --morado: #8a2be2;
-            --morado-claro: #b36bff;
-            --fondo: #0f0a1a;
-            --navbar-height: 80px; 
-            --navbar-bg: rgba(15, 10, 26, 0.95);
-            --glass-bg: rgba(20, 20, 20, 0.75);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.15);
-            --glass-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
-        }
-        
-        body {
-            margin: 0;
-            padding-top: var(--navbar-height); 
-            font-family: 'Poppins', sans-serif;
-            color: white;
-            min-height: 100vh;
-            background-color: var(--fondo);
-            overflow-x: hidden; 
-            position: relative; 
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.postimg.cc/GtMbT2Cm/minecraft-cozy.jpg') no-repeat center center;
-            background-size: cover;
-            z-index: -1; 
-            -webkit-transform: translate3d(0, 0, 0); 
-            transform: translate3d(0, 0, 0); 
-        }
-
-        .logo-container {
-            width: 200px; 
-            height: 200px; 
-            margin: 0 auto 2rem; 
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid var(--morado); 
-            box-shadow: 0 0 30px var(--morado); 
-            background: white;
-            transition: transform 0.3s; 
-        }
-
-        .logo-container:hover { 
-            transform: scale(1.05);
-        }
-
-        .logo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border-radius: 18px;
-            border: var(--glass-border);
-            box-shadow: var(--glass-shadow);
-            transition: all 0.3s ease;
-        }
-
-        /* --- Sticky Navbar Superior (Nueva Barra de Navegación) --- */
-        .top-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--navbar-height);
-            background: var(--navbar-bg);
-            backdrop-filter: blur(15px);
-            z-index: 1900;
-            display: flex;
-            align-items: center;
-            justify-content: center; /* Centrado horizontal */
-            padding: 0 2rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .navbar-links {
-            display: flex;
-            position: relative; 
-            height: 60px; 
-            background: rgba(30, 30, 30, 0.6); 
-            border-radius: 50px;
-            padding: 0 10px; 
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-            max-width: 450px; 
-            width: 100%; 
-            align-items: center;
-            justify-content: space-around; 
-        }
-
-        .navbar-link {
-            flex: 1; 
-            display: flex;
-            flex-direction: column; 
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: color 0.3s ease, transform 0.3s ease;
-            position: relative;
-            z-index: 2; 
-            padding: 0 5px; 
-        }
-
-        .navbar-link i {
-            font-size: 1.5rem;
-            margin-bottom: 3px;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-link.active {
-            color: white; 
-            transform: translateY(-5px); 
-        }
-        .navbar-link.active i {
-            color: white; 
-        }
-
-        .indicator {
-            position: absolute;
-            height: 70px; 
-            width: 70px; 
-            background: var(--morado); 
-            border-radius: 50%; 
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
-            box-shadow: 0 0 15px var(--morado-claro), 0 5px 15px rgba(0,0,0,0.3); 
-            z-index: 1; 
-            top: 50%; 
-            transform: translate(-50%, -50%); 
-            opacity: 0; 
-        }
-        .indicator.visible {
-            opacity: 1;
-        }
-
-        /* --- FIN Sticky Navbar Superior --- */
-
-        header {
-            padding: 1.5rem 2rem;
-            margin: 1.5rem;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        h1 {
-            color: var(--morado-claro);
-            margin: 0.5rem 0;
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            font-family: 'Montserrat', sans-serif;
-            text-shadow: 0 0 8px rgba(179, 107, 255, 0.8), 
-                         0 0 15px rgba(179, 107, 255, 0.5);
-            display: block;
-        }
-
-        main {
-            padding: 0 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .proyectos-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
-            padding: 20px;
-        }
-
-        .proyecto {
-            background: rgba(30, 30, 30, 0.7);
-            border-left: 4px solid var(--morado);
-            transition: all 0.4s;
-        }
-
-        .proyecto:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
-        }
-
-        .proyecto img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .proyecto-contenido {
-            padding: 1.5rem;
-        }
-
-        .proyecto h3 {
-            color: var(--morado-claro);
-            margin: 0;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-        .proyecto h3 i {
-            flex-shrink: 0;
-        }
-
-        .proyecto p {
-            color: #e0e0e0;
-            line-height: 1.5;
-            margin: 1rem 0;
-        }
-
-        .proyecto a {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(138, 43, 226, 0.2);
-            color: var(--morado-claro);
-            padding: 0.6rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            border: 1px solid var(--morado);
-        }
-
-        .proyecto a:hover {
-            background: var(--morado);
-            color: white;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            margin-top: 3rem;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            :root {
-                --navbar-height: 70px; 
-            }
-            body {
-                padding-top: var(--navbar-height);
-            }
-            .logo-container {
-                width: 120px;
-                height: 120px;
-                margin-top: 2rem;
-            }
-            
-            header {
-                padding: 1.5rem;
-                margin: 1rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .top-navbar {
-                padding: 0 1rem;
-            }
-            .navbar-links {
-                height: 55px; 
-                padding: 0 5px;
-            }
-            .navbar-link {
-                font-size: 0.8rem; 
-            }
-            .navbar-link i {
-                font-size: 1.3rem;
-            }
-            .indicator {
-                height: 60px; 
-                width: 60px; 
-                border-radius: 50%;
-            }
-
-            .proyectos-grid {
-                grid-template-columns: 1fr;
-            }
-            .proyecto h3 {
-                font-size: 1.1rem;
-            }
-        }
-
-        /* Ajustes para PC */
-        @media (min-width: 769px) {
-            h1 {
-                font-size: 3rem;
-            }
-            .logo-container {
-                width: 250px;
-                height: 250px;
-            }
-            .top-navbar {
-                justify-content: center;
-            }
-            .navbar-links {
-                height: 65px;
-                max-width: 500px;
-            }
-            .navbar-link {
-                font-size: 1rem;
-            }
-            .navbar-link i {
-                font-size: 1.7rem;
-            }
-            .indicator {
-                height: 70px; 
-                width: 70px; 
-            }
-            main {
-                max-width: 1000px;
-                padding: 0 4rem;
-            }
-        }
-    </style>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Animación de carga -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="loading-spinner"></div>
+                <img src="https://i.postimg.cc/MptZhd4Q/1752970060758.jpg" alt="AriesitoMc" onerror="this.src='https://via.placeholder.com/100x100/8a2be2/ffffff?text=AM'">
+            </div>
+            <h2>𝐀𝐫𝐢𝐞𝐬𝐢𝐭𝐨𝐌𝐜</h2>
+            <p>Cargando proyectos...</p>
+        </div>
+    </div>
+
+    <!-- Efecto de partículas -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navegación -->
     <div class="top-navbar">
         <div class="navbar-links" id="main-nav-links">
             <a href="index.html" class="navbar-link" data-page="index">
                 <i class='bx bxs-home'></i>
                 <span>Inicio</span>
             </a>
-            <a href="proyectos.html" class="navbar-link" data-page="proyectos">
+            <a href="proyectos.html" class="navbar-link active" data-page="proyectos">
                 <i class='bx bxs-folder-open'></i>
                 <span>Proyectos</span>
             </a>
@@ -355,18 +47,16 @@
                 <i class='bx bxs-share-alt'></i>
                 <span>Redes</span>
             </a>
+            <a href="app.html" class="navbar-link" data-page="app">
+                <i class='bx bxs-mobile'></i>
+                <span>App</span>
+            </a>
             <span class="indicator"></span>
         </div>
     </div>
 
     <div id="main">
-        <div class="logo-container glass">
-            <img src="https://i.postimg.cc/MptZhd4Q/1752970060758.jpg" alt="Logo AriesitoMc">
-        </div>
-
-        <header class="glass">
-            <h1>𝐀𝐫𝐢𝐞𝐬𝐢𝐭𝐨𝐌𝐜</h1> 
-        </header>
+        <!-- NO hay logo ni título en esta página -->
 
         <main>
             <section id="proyectos" class="glass" style="margin: 2rem auto;">
@@ -374,100 +64,17 @@
                     <i class='bx bxs-palette'></i> Mis Proyectos
                 </h2>
                 <div class="proyectos-grid" id="proyectos-grid">
-                    </div>
+                    <!-- Proyectos se cargan con JS -->
+                </div>
             </section>
         </main>
 
         <footer class="glass">
-            <p>AriesitoMc © 2024 All Rights Reserved</p>
+            <p>AriesitoMc © 2024 - Todos los derechos reservados</p>
         </footer>
     </div>
 
-    <script>
-        // Contenido de los proyectos (SOLO LOS TUYOS)
-        const proyectos = [
-            {
-                titulo: "Export World 1.21.93+",
-                descripcion: "Descarga la ultima Versión de esta maravillosa textura para exportar tus Mundos en Minecraft Bedrock",
-                imagen: "https://i.postimg.cc/htPFkgVS/pack-icon.png",
-                enlace: "https://linkvertise.com/1356996/2CLfIqkU7XTB?o=sharing",
-                icono: "bxs-palette"
-            },
-            {
-                titulo: "Obsidian V2.3",
-                descripcion: "Optimiza tu Juego al Maximo con este Increíble Optimizador",
-                imagen: "https://i.postimg.cc/mgrqdjGk/pack-icon-2.png",
-                enlace: "https://link-target.net/1356996/zMa3fwoanGAK",
-                icono: "bxs-palette"
-            }
-        ];
-
-        const grid = document.getElementById('proyectos-grid');
-        
-        proyectos.forEach(proyecto => {
-            const card = document.createElement('div');
-            card.className = 'proyecto glass';
-            card.innerHTML = `
-                <img src="${proyecto.imagen}" alt="${proyecto.titulo}">
-                <div class="proyecto-contenido">
-                    <h3><i class='bx ${proyecto.icono}'></i> ${proyecto.titulo}</h3>
-                    <p>${proyecto.descripcion}</p>
-                    <a href="${proyecto.enlace}" target="_blank"><i class='bx bx-download'></i> Descargar</a>
-                </div>
-            `;
-            grid.appendChild(card);
-        });
-
-        // Script para la nueva barra de navegación
-        document.addEventListener("DOMContentLoaded", function() {
-            const navLinks = document.querySelectorAll('.navbar-link');
-            const indicator = document.querySelector('.indicator');
-            const currentPath = window.location.pathname.split("/").pop();
-            let activeLink = null;
-
-            // Determinar el enlace activo al cargar la página
-            navLinks.forEach(link => {
-                const linkPage = link.getAttribute('data-page');
-                const expectedPath = `${linkPage}.html`;
-                if (currentPath === expectedPath || (currentPath === "" && linkPage === "index")) {
-                    activeLink = link;
-                    link.classList.add('active');
-                }
-            });
-
-            // Posicionar el indicador inicialmente
-            function positionIndicator() {
-                if (activeLink) {
-                    indicator.style.left = `${activeLink.offsetLeft + (activeLink.offsetWidth / 2)}px`;
-                    indicator.classList.add('visible');
-                }
-            }
-
-            positionIndicator();
-            window.addEventListener('resize', positionIndicator);
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    if (activeLink) {
-                        activeLink.classList.remove('active');
-                    }
-
-                    activeLink = this;
-                    activeLink.classList.add('active');
-
-                    positionIndicator();
-
-                    setTimeout(() => {
-                        window.location.href = this.href;
-                    }, 300); 
-                    
-                    e.preventDefault(); 
-                });
-            });
-        });
-
-        document.addEventListener('gesturestart', e => e.preventDefault());
-    </script>
+    <!-- JavaScript -->
+    <script src="main.js"></script>
 </body>
 </html>
-

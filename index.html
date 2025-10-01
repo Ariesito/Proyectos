@@ -4,329 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>AriesitoMc | Inicio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --morado: #8a2be2;
-            --morado-claro: #b36bff;
-            --fondo: #0f0a1a;
-            --navbar-height: 80px; 
-            --navbar-bg: rgba(15, 10, 26, 0.95);
-            --glass-bg: rgba(20, 20, 20, 0.75);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.15);
-            --glass-shadow: 0 10px 35px rgba(0, 0, 0, 0.5);
-        }
-        
-        body {
-            margin: 0;
-            padding-top: var(--navbar-height); 
-            font-family: 'Raleway', sans-serif;
-            color: white;
-            min-height: 100vh;
-            background-color: var(--fondo);
-            overflow-x: hidden; 
-            position: relative; 
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://i.postimg.cc/GtMbT2Cm/minecraft-cozy.jpg') no-repeat center center;
-            background-size: cover;
-            z-index: -1; 
-            -webkit-transform: translate3d(0, 0, 0); 
-            transform: translate3d(0, 0, 0); 
-        }
-
-        .logo-container {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 2rem;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid var(--morado);
-            box-shadow: 0 0 30px var(--morado);
-            background: white;
-            transition: transform 0.3s;
-        }
-
-        .logo-container:hover {
-            transform: scale(1.05);
-        }
-
-        .logo-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border-radius: 18px;
-            border: var(--glass-border);
-            box-shadow: var(--glass-shadow);
-            transition: all 0.3s ease;
-        }
-
-        /* --- Sticky Navbar Superior (Nueva Barra de Navegación) --- */
-        .top-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--navbar-height);
-            background: var(--navbar-bg);
-            backdrop-filter: blur(15px);
-            z-index: 1900;
-            display: flex;
-            align-items: center;
-            justify-content: center; /* Centrado horizontal */
-            padding: 0 2rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .navbar-links {
-            display: flex;
-            position: relative; /* Para posicionar el indicador */
-            height: 60px; /* Altura de la barra interna */
-            background: rgba(30, 30, 30, 0.6); /* Fondo de la barra interna */
-            border-radius: 50px;
-            padding: 0 10px; /* Espacio interno */
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-            max-width: 450px; /* Limita el ancho en PC */
-            width: 100%; /* Ocupa todo el ancho disponible */
-            align-items: center;
-            justify-content: space-around; /* Distribuye los elementos */
-        }
-
-        .navbar-link {
-            flex: 1; /* Distribuye el espacio equitativamente */
-            display: flex;
-            flex-direction: column; /* Icono y texto en columna */
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: color 0.3s ease, transform 0.3s ease; /* Añadir transform para el movimiento */
-            position: relative;
-            z-index: 2; /* Asegura que los enlaces estén sobre el indicador */
-            padding: 0 5px; /* Pequeño padding para el texto */
-        }
-
-        .navbar-link i {
-            font-size: 1.5rem;
-            margin-bottom: 3px;
-            transition: color 0.3s ease;
-        }
-
-        .navbar-link.active {
-            color: white; /* Color del texto cuando está activo */
-            /* Efecto de "levantar" ligeramente el enlace activo */
-            transform: translateY(-5px); 
-        }
-        .navbar-link.active i {
-            color: white; /* Color del icono cuando está activo */
-        }
-
-        .indicator {
-            position: absolute;
-            height: 70px; /* Altura ligeramente mayor para simular separación */
-            width: 70px; /* Ancho fijo para un círculo/óvalo */
-            background: var(--morado); /* Color del indicador */
-            border-radius: 50%; /* Hacerlo circular */
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Animación elástica */
-            box-shadow: 0 0 15px var(--morado-claro), 0 5px 15px rgba(0,0,0,0.3); /* Sombra para profundidad */
-            z-index: 1; /* Detrás de los enlaces */
-            /* Ajuste para que parezca "separado" y centrado */
-            top: 50%; 
-            transform: translate(-50%, -50%); /* Centrado inicial, left lo moverá */
-            opacity: 0; /* Oculto inicialmente hasta que JS lo posicione */
-        }
-        .indicator.visible {
-            opacity: 1; /* Visible cuando JS lo activa */
-        }
-
-        /* --- FIN Sticky Navbar Superior --- */
-
-        header {
-            padding: 2rem;
-            margin: 1.5rem;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        h1 {
-            color: var(--morado-claro);
-            margin: 0.5rem 0 1.5rem;
-            font-size: 2.5rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            font-family: 'Montserrat', sans-serif;
-            text-shadow: 0 0 8px rgba(179, 107, 255, 0.8), 
-                         0 0 15px rgba(179, 107, 255, 0.5);
-        }
-        
-        main {
-            padding: 0 2rem;
-            max-width: 1200px;
-            margin: 0 auto 3rem;
-        }
-
-        .noticias-grid {
-            display: grid;
-            gap: 30px;
-            padding: 20px;
-        }
-
-        .noticia {
-            background: rgba(35, 35, 35, 0.7);
-            border-left: 5px solid var(--morado);
-            transition: all 0.4s;
-            padding: 2rem;
-        }
-
-        .noticia:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(138, 43, 226, 0.4);
-        }
-
-        .noticia h3 {
-            color: var(--morado-claro);
-            margin: 0 0 1.5rem 0;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .noticia h3 i {
-            flex-shrink: 0;
-        }
-
-        .noticia p {
-            color: #e0e0e0;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            font-size: 1.05rem;
-        }
-
-        .noticia .fecha {
-            color: #b36bff;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2.5rem;
-            font-size: 1rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            :root {
-                --navbar-height: 70px; 
-            }
-            body {
-                padding-top: var(--navbar-height);
-            }
-
-            .logo-container {
-                width: 160px;
-                height: 160px;
-                margin-top: 2rem; 
-            }
-            
-            header {
-                padding: 1.5rem;
-                margin: 1rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            .top-navbar {
-                padding: 0 1rem;
-            }
-            .navbar-links {
-                height: 55px; /* Altura de la barra interna en móvil */
-                padding: 0 5px;
-            }
-            .navbar-link {
-                font-size: 0.8rem; /* Fuente más pequeña para que quepan */
-            }
-            .navbar-link i {
-                font-size: 1.3rem;
-            }
-            .indicator {
-                height: 60px; /* Más pequeño para móvil */
-                width: 60px; /* Más pequeño para móvil */
-                border-radius: 50%;
-            }
-
-            .noticias-grid {
-                grid-template-columns: 1fr;
-            }
-            .noticia h3 {
-                font-size: 1.3rem;
-            }
-        }
-
-        /* Ajustes para PC */
-        @media (min-width: 769px) {
-            h1 {
-                font-size: 3rem; 
-            }
-            .logo-container {
-                width: 250px; 
-                height: 250px;
-            }
-            .top-navbar {
-                justify-content: center; 
-            }
-            .navbar-links {
-                height: 65px; /* Altura de la barra interna en PC */
-                max-width: 500px; /* Ancho máximo ajustado para PC */
-            }
-            .navbar-link {
-                font-size: 1rem; 
-            }
-            .navbar-link i {
-                font-size: 1.7rem;
-            }
-            .indicator {
-                height: 70px; 
-                width: 70px; 
-            }
-            main {
-                max-width: 1000px; 
-                padding: 0 4rem; 
-            }
-        }
-    </style>
+    
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Animación de carga -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="loading-spinner"></div>
+                <img src="https://i.postimg.cc/MptZhd4Q/1752970060758.jpg" alt="AriesitoMc" onerror="this.src='https://via.placeholder.com/100x100/8a2be2/ffffff?text=AM'">
+            </div>
+            <h2>𝐀𝐫𝐢𝐞𝐬𝐢𝐭𝐨𝐌𝐜</h2>
+            <p>Cargando experiencia...</p>
+        </div>
+    </div>
+
+    <!-- Efecto de partículas -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navegación -->
     <div class="top-navbar">
         <div class="navbar-links" id="main-nav-links">
-            <a href="index.html" class="navbar-link" data-page="index">
+            <a href="index.html" class="navbar-link active" data-page="index">
                 <i class='bx bxs-home'></i>
                 <span>Inicio</span>
             </a>
@@ -338,13 +47,18 @@
                 <i class='bx bxs-share-alt'></i>
                 <span>Redes</span>
             </a>
+            <a href="app.html" class="navbar-link" data-page="app">
+                <i class='bx bxs-mobile'></i>
+                <span>App</span>
+            </a>
             <span class="indicator"></span>
         </div>
     </div>
 
     <div id="main">
+        <!-- Logo y título SOLO en index.html -->
         <div class="logo-container glass">
-            <img src="https://i.postimg.cc/MptZhd4Q/1752970060758.jpg" alt="Logo AriesitoMc">
+            <img src="https://i.postimg.cc/MptZhd4Q/1752970060758.jpg" alt="Logo AriesitoMc" onerror="this.src='https://via.placeholder.com/200x200/8a2be2/ffffff?text=AriesitoMc'">
         </div>
 
         <header class="glass">
@@ -357,7 +71,8 @@
                     <i class='bx bxs-news'></i> Últimas Noticias
                 </h2>
                 <div class="noticias-grid" id="noticias-grid">
-                    </div>
+                    <!-- Noticias se cargan con JS -->
+                </div>
             </section>
         </main>
 
@@ -366,98 +81,7 @@
         </footer>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Contenido de las noticias
-            const noticias = [
-                {
-                    titulo: "Obsidian 2.4",
-                    contenido: "¿Se Confirma La Obsidian Update? recientemente Ariesito envío algunas imágenes en su comunidad de WhatsApp que demuestran que está trabajando en Obsidian posiblemente sea una de las más grandes actualizaciones!",
-                    fecha: "11/09/2025",
-                    icono: "bxs-palette"
-                },
-                {
-                    titulo: "Nuevo Canal",
-                    contenido: "AriesitoMc tiene un nuevo nombre de usuario en todas sus redes sociales (SoyAriesitomc) Que esperas para seguirlo?",
-                    fecha: "11/09/2025",
-                    icono: "bxs-star"
-                }
-            ];
-
-            const grid = document.getElementById('noticias-grid');
-            
-            // Asegurarse de que el elemento existe antes de intentar usarlo
-            if (grid) {
-                noticias.forEach(noticia => {
-                    const card = document.createElement('div');
-                    card.className = 'noticia glass';
-                    card.innerHTML = `
-                        <h3><i class='bx ${noticia.icono}'></i> ${noticia.titulo}</h3>
-                        <p>${noticia.contenido}</p>
-                        <div class="fecha"><i class='bx bx-calendar'></i> ${noticia.fecha}</div>
-                    `;
-                    grid.appendChild(card);
-                });
-            }
-
-            // Script para la nueva barra de navegación
-            const navLinks = document.querySelectorAll('.navbar-link');
-            const indicator = document.querySelector('.indicator');
-            const currentPath = window.location.pathname.split("/").pop();
-            let activeLink = null;
-
-            // Determinar el enlace activo al cargar la página
-            navLinks.forEach(link => {
-                const linkPage = link.getAttribute('data-page');
-                const expectedPath = `${linkPage}.html`;
-                // Check for index.html (which might be just "" or "/")
-                if (currentPath === expectedPath || (currentPath === "" && linkPage === "index")) {
-                    activeLink = link;
-                    link.classList.add('active');
-                }
-            });
-
-            // Posicionar el indicador inicialmente
-            function positionIndicator() {
-                if (activeLink) {
-                    // Calcula el 'left' para centrar el indicador bajo el enlace activo
-                    indicator.style.left = `${activeLink.offsetLeft + (activeLink.offsetWidth / 2)}px`;
-                    indicator.classList.add('visible'); // Hacer el indicador visible
-                }
-            }
-
-            // Llamar al posicionamiento inicial y al redimensionar
-            positionIndicator();
-            window.addEventListener('resize', positionIndicator);
-
-            // Manejar clics en los enlaces
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Remover clase 'active' del enlace anterior
-                    if (activeLink) {
-                        activeLink.classList.remove('active');
-                    }
-
-                    // Actualizar el enlace activo y añadir la clase 'active'
-                    activeLink = this;
-                    activeLink.classList.add('active');
-
-                    // Mover el indicador
-                    positionIndicator();
-
-                    // Navegar a la página después de un pequeño retraso para la animación
-                    // Ajustamos el tiempo para que la animación se complete antes de la navegación
-                    setTimeout(() => {
-                        window.location.href = this.href;
-                    }, 300); 
-                    
-                    e.preventDefault(); // Prevenir la navegación inmediata
-                });
-            });
-        });
-
-        document.addEventListener('gesturestart', e => e.preventDefault());
-    </script>
+    <!-- JavaScript -->
+    <script src="main.js"></script>
 </body>
 </html>
-

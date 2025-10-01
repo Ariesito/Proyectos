@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AriesitoMc | App</title>
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap" rel="stylesheet">
+    
+    <!-- Iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Animación de carga -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="loading-spinner"></div>
+                <img src="https://i.postimg.cc/MptZhd4Q/1752970060758.jpg" alt="AriesitoMc" onerror="this.src='https://via.placeholder.com/100x100/8a2be2/ffffff?text=AM'">
+            </div>
+            <h2>𝐀𝐫𝐢𝐞𝐬𝐢𝐭𝐨𝐌𝐜</h2>
+            <p>Cargando aplicación...</p>
+        </div>
+    </div>
+
+    <!-- Efecto de partículas -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navegación -->
+    <div class="top-navbar">
+        <div class="navbar-links" id="main-nav-links">
+            <a href="index.html" class="navbar-link" data-page="index">
+                <i class='bx bxs-home'></i>
+                <span>Inicio</span>
+            </a>
+            <a href="proyectos.html" class="navbar-link" data-page="proyectos">
+                <i class='bx bxs-folder-open'></i>
+                <span>Proyectos</span>
+            </a>
+            <a href="redes.html" class="navbar-link" data-page="redes">
+                <i class='bx bxs-share-alt'></i>
+                <span>Redes</span>
+            </a>
+            <a href="app.html" class="navbar-link active" data-page="app">
+                <i class='bx bxs-mobile'></i>
+                <span>App</span>
+            </a>
+            <span class="indicator"></span>
+        </div>
+    </div>
+
+    <div id="main">
+        <!-- NO hay logo ni título en esta página -->
+
+        <main>
+            <section id="app" class="glass" style="margin: 2rem auto;">
+                <h2 style="text-align: center; margin-bottom: 2rem;">
+                    <i class='bx bxs-mobile'></i> App Oficial AriesitoMc
+                </h2>
+                
+                <div class="app-container">
+                    <div class="app-hero glass">
+                        <div class="app-icon">
+                            <i class='bx bxs-mobile'></i>
+                        </div>
+                        <h3>Lleva AriesitoMc Contigo</h3>
+                        <p>Descarga nuestra aplicación oficial para Android y lleva toda la experiencia de AriesitoMc en tu dispositivo móvil.</p>
+                    </div>
+
+                    <div class="app-features">
+                        <div class="feature-card glass">
+                            <i class='bx bx-sync'></i>
+                            <h4>Sincronización Automática</h4>
+                            <p>La app se actualiza automáticamente cada vez que actualizamos la web</p>
+                        </div>
+                        
+                        <div class="feature-card glass">
+                            <i class='bx bx-rocket'></i>
+                            <h4>Rendimiento Optimizado</h4>
+                            <p>Diseñada específicamente para dispositivos móviles</p>
+                        </div>
+                        
+                        <div class="feature-card glass">
+                            <i class='bx bx-bell'></i>
+                            <h4>Notificaciones</h4>
+                            <p>Recibe notificaciones de nuevas actualizaciones y proyectos</p>
+                        </div>
+                    </div>
+
+                    <div class="download-section glass">
+                        <h3>Descargar Ahora</h3>
+                        <p>Disponible exclusivamente para dispositivos Android</p>
+                        
+                        <div class="download-buttons">
+                            <a href="#" class="download-btn primary" id="download-apk">
+                                <i class='bx bxs-download'></i>
+                                <span>Descargar APK</span>
+                                <small>Versión 1.0</small>
+                            </a>
+                            
+                            <a href="https://play.google.com/store/apps/details?id=com.ariesitomc.app" class="download-btn secondary" target="_blank">
+                                <i class='bx bxl-play-store'></i>
+                                <span>Google Play</span>
+                                <small>Próximamente</small>
+                            </a>
+                        </div>
+
+                        <!-- Indicador de descarga añadido aquí -->
+                        <div class="download-info glass" style="margin-top: 1rem; padding: 1rem; text-align: center; display: none;" id="download-status">
+                            <p><i class='bx bx-download'></i> Descargando aplicación...</p>
+                            <small>El archivo "AriesitoMc.apk" se descargará automáticamente</small>
+                        </div>
+                        
+                        <div class="app-info">
+                            <h4>Información de la App</h4>
+                            <ul>
+                                <li><strong>Versión:</strong> 1.0</li>
+                                <li><strong>Tamaño:</strong> ~15 MB</li>
+                                <li><strong>Android:</strong> 10++</li>
+                                <li><strong>Actualizado:</strong> 1 - Octubre - 2025</li>
+                                <li><strong>Archivo:</strong> AriesitoMc.apk</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="instructions glass">
+                        <h3>¿Cómo Instalar?</h3>
+                        <div class="steps">
+                            <div class="step">
+                                <span class="step-number">1</span>
+                                <p>Descarga el archivo APK haciendo clic en el botón "Descargar APK"</p>
+                            </div>
+                            <div class="step">
+                                <span class="step-number">2</span>
+                                <p>Habilita "Instalar desde fuentes desconocidas" en ajustes de seguridad</p>
+                            </div>
+                            <div class="step">
+                                <span class="step-number">3</span>
+                                <p>Abre el archivo descargado y sigue las instrucciones de instalación</p>
+                            </div>
+                            <div class="step">
+                                <span class="step-number">4</span>
+                                <p>¡Disfruta de la app oficial de AriesitoMc!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="security-notice glass">
+                        <h4><i class='bx bx-shield'></i> Nota de Seguridad</h4>
+                        <p>Esta aplicación es 100% segura y solo contiene la web de AriesitoMc en formato app. No recopila datos personales ni requiere permisos especiales.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="glass">
+            <p>AriesitoMc © 2024 - Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>
