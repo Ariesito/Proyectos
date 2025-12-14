@@ -2,33 +2,20 @@
 const appData = {
     noticias: [
         {
-            titulo: "Nuevos Cambios en la Web",
-            contenido: "Se cambiaron algunos Estilos en la Web para una mejor experiencia.",
-            fecha: "1/10/2025",
-            icono: "bxs-news"
-        },
-        {
-            titulo: "Obsidian 2.4",
-            contenido: "¿Se Confirma La Obsidian Update? Recientemente Ariesito envió algunas imágenes en su comunidad de WhatsApp que demuestran que está trabajando en Obsidian. ¡Posiblemente sea una de las más grandes actualizaciones!",
-            fecha: "11/09/2025",
-            icono: "bxs-palette"
-        },
-        {
-            titulo: "Nuevo Canal",
-            contenido: "AriesitoMc tiene un nuevo nombre de usuario en todas sus redes sociales (@SoyAriesitomc). ¿Qué esperas para seguirlo?",
-            fecha: "11/09/2025",
+            titulo: "¿Ariesito a Regresado?",
+            contenido: "Hace una par de horas Ariesito compartió unas imágenes donde se le veía jugando Minecraft concretamente en (AriesLand) su mundo Survival, es esto un aviso de que regresará?",
+            fecha: "14/12/2025",
             icono: "bxs-star"
-        }
+        },
+        {
+            titulo: "Nuevo Canal de YouTube",
+            contenido: "Ya puedes seguir a AriesitoMc en su Nuevo Canal de YouTube \n(Ariesitomc Official) En el apartado de redes, para no perderte de nuevas noticias y estar pendiente de nuevo contenido",
+            fecha: "14/12/2025",
+            icono: "bxs-star"
+        }        
     ],
     
     proyectos: [
-        {
-            titulo: "Export World 1.21.93+",
-            descripcion: "Descarga la última versión de esta maravillosa textura para exportar tus mundos en Minecraft Bedrock con la mejor calidad y rendimiento.",
-            imagen: "https://i.postimg.cc/htPFkgVS/pack-icon.png",
-            enlace: "https://linkvertise.com/1356996/2CLfIqkU7XTB?o=sharing",
-            icono: "bxs-palette"
-        },
         {
             titulo: "Obsidian V2.3",
             descripcion: "Optimiza tu juego al máximo con este increíble optimizador que mejora el rendimiento y la experiencia visual en Minecraft.",
@@ -42,7 +29,7 @@ const appData = {
         {
             nombre: "YouTube",
             descripcion: "Suscríbete para ver tutoriales, showcases y reviews de mis packs de texturas. Contenido exclusivo cada semana.",
-            url: "https://www.youtube.com/@soyariesitomc",
+            url: "https://m.youtube.com/channel/UCRvXgmzaJSRI7Q9tawlEREA",
             icono: "fab fa-youtube",
             color: "#FF0000"
         },
@@ -69,33 +56,6 @@ const appData = {
         }
     ]
 };
-
-// Animación de carga - MODIFICADA para usar sessionStorage
-function showLoadingScreen(force = false) {
-    const loadingScreen = document.getElementById('loading-screen');
-    const hasVisited = sessionStorage.getItem('hasVisited');
-
-    // Solo mostrar si no ha visitado la sesión o si se fuerza (como en la navegación)
-    if (loadingScreen && (!hasVisited || force)) {
-        // Establecer la bandera para la sesión
-        sessionStorage.setItem('hasVisited', 'true');
-        
-        // Mostrar loading screen
-        loadingScreen.style.display = 'flex';
-        loadingScreen.classList.remove('fade-out');
-        
-        // Ocultar después de un tiempo
-        setTimeout(() => {
-            loadingScreen.classList.add('fade-out');
-            setTimeout(() => {
-                loadingScreen.style.display = 'none';
-            }, 500);
-        }, force ? 800 : 2000); // Animación más corta para transiciones
-    } else if (loadingScreen) {
-        // Si ya visitó en esta sesión, ocultar inmediatamente por si acaso
-        loadingScreen.style.display = 'none';
-    }
-}
 
 // Cargar noticias
 function loadNoticias() {
@@ -265,23 +225,21 @@ function setupNavigation() {
             // Mover el indicador
             positionIndicator();
 
-            // Mostrar animación de carga ANTES de navegar
-            showLoadingScreen(true); // Forzar la animación para la transición
+            // [SE ELIMINÓ la llamada a showLoadingScreen(true);]
             
             const targetHref = this.href;
 
-            // Navegar a la página después del retraso de la animación (800ms)
+            // Navegar a la página después del retraso del indicador
             setTimeout(() => {
                 window.location.href = targetHref;
-            }, 800);
+            }, 400); // Se ajusta a 400ms para corresponder a la transición CSS
         });
     });
 }
 
 // Inicializar la aplicación
 document.addEventListener("DOMContentLoaded", function() {
-    // Mostrar animación de carga inicial (solo si no ha visitado)
-    showLoadingScreen();
+    // [SE ELIMINÓ la llamada inicial a showLoadingScreen();]
     
     // Configurar navegación
     setupNavigation();
@@ -316,3 +274,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
