@@ -70,20 +70,30 @@ const appData = {
     ]
 };
 
-// Animación de carga
-function showLoadingScreen() {
+// Animación de carga - MODIFICADA para usar sessionStorage
+function showLoadingScreen(force = false) {
     const loadingScreen = document.getElementById('loading-screen');
-    if (loadingScreen) {
+    const hasVisited = sessionStorage.getItem('hasVisited');
+
+    // Solo mostrar si no ha visitado la sesión o si se fuerza (como en la navegación)
+    if (loadingScreen && (!hasVisited || force)) {
+        // Establecer la bandera para la sesión
+        sessionStorage.setItem('hasVisited', 'true');
+        
         // Mostrar loading screen
         loadingScreen.style.display = 'flex';
+        loadingScreen.classList.remove('fade-out');
         
-        // Ocultar después de 2 segundos (solo animación, no carga real)
+        // Ocultar después de un tiempo
         setTimeout(() => {
             loadingScreen.classList.add('fade-out');
             setTimeout(() => {
                 loadingScreen.style.display = 'none';
             }, 500);
-        }, 2000);
+        }, force ? 800 : 2000); // Animación más corta para transiciones
+    } else if (loadingScreen) {
+        // Si ya visitó en esta sesión, ocultar inmediatamente por si acaso
+        loadingScreen.style.display = 'none';
     }
 }
 
@@ -241,6 +251,8 @@ function setupNavigation() {
     // Manejar clics en los enlaces
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
             // Remover clase 'active' del enlace anterior
             if (activeLink) {
                 activeLink.classList.remove('active');
@@ -253,22 +265,22 @@ function setupNavigation() {
             // Mover el indicador
             positionIndicator();
 
-            // Mostrar animación de carga antes de navegar
-            showLoadingScreen();
-
-            // Navegar a la página después de un pequeño retraso para la animación
-            setTimeout(() => {
-                window.location.href = this.href;
-            }, 800);
+            // Mostrar animación de carga ANTES de navegar
+            showLoadingScreen(true); // Forzar la animación para la transición
             
-            e.preventDefault();
+            const targetHref = this.href;
+
+            // Navegar a la página después del retraso de la animación (800ms)
+            setTimeout(() => {
+                window.location.href = targetHref;
+            }, 800);
         });
     });
 }
 
 // Inicializar la aplicación
 document.addEventListener("DOMContentLoaded", function() {
-    // Mostrar animación de carga inicial
+    // Mostrar animación de carga inicial (solo si no ha visitado)
     showLoadingScreen();
     
     // Configurar navegación
